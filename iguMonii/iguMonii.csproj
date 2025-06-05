@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{711FC832-8A48-4652-A638-DFA93BDBC8C9}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>iguMonii</RootNamespace>
+    <AssemblyName>iguMonii</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>iguMonii.Program</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="frmCategoryLimits.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCategoryLimits.Designer.cs">
+      <DependentUpon>frmCategoryLimits.cs</DependentUpon>
+    </Compile>
+    <Compile Include="useCaseEditIncome.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="useCaseEditIncome.Designer.cs">
+      <DependentUpon>useCaseEditIncome.cs</DependentUpon>
+    </Compile>
+    <Compile Include="useCaseEditSaving.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="useCaseEditSaving.Designer.cs">
+      <DependentUpon>useCaseEditSaving.cs</DependentUpon>
+    </Compile>
+    <Compile Include="useCaseManageSavings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="useCaseManageSavings.Designer.cs">
+      <DependentUpon>useCaseManageSavings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="useCaseStart.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="useCaseStart.Designer.cs">
+      <DependentUpon>useCaseStart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="useCaseManageCategories.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="useCaseManageCategories.Designer.cs">
+      <DependentUpon>useCaseManageCategories.cs</DependentUpon>
+    </Compile>
+    <Compile Include="useCaseManageExpenses.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="useCaseManageExpenses.Designer.cs">
+      <DependentUpon>useCaseManageExpenses.cs</DependentUpon>
+    </Compile>
+    <Compile Include="useCaseManageIncomes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="useCaseManageIncomes.Designer.cs">
+      <DependentUpon>useCaseManageIncomes.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="frmCategoryLimits.resx">
+      <DependentUpon>frmCategoryLimits.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="useCaseEditIncome.resx">
+      <DependentUpon>useCaseEditIncome.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="useCaseEditSaving.resx">
+      <DependentUpon>useCaseEditSaving.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="useCaseManageExpenses.resx">
+      <DependentUpon>useCaseManageExpenses.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="useCaseManageIncomes.resx">
+      <DependentUpon>useCaseManageIncomes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="useCaseManageSavings.resx">
+      <DependentUpon>useCaseManageSavings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="useCaseStart.resx">
+      <DependentUpon>useCaseStart.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Captura de pantalla 2025-05-29 232944.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\appMonii\libMonii.csproj">
+      <Project>{103072f9-3174-48a5-8a50-4d5144c7c8c6}</Project>
+      <Name>libMonii</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\libServices\libServices.csproj">
+      <Project>{303f7208-0095-4be6-bc0d-a6a39419a49b}</Project>
+      <Name>libServices</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Captura de pantalla 2025-05-31 130628.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Captura de pantalla 2025-05-31 130843.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Captura de pantalla 2025-05-31 131154.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Captura de pantalla 2025-05-31 135721.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Captura de pantalla 2025-05-31 150738.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Captura de pantalla 2025-05-31 160722.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Captura de pantalla 2025-05-31 160756.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
