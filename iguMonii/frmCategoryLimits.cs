@@ -17,7 +17,7 @@ namespace iguMonii
 
         private void LoadLimits()
         {
-            dgvLimitsCategoryLimits.Columns.Clear(); // Limpia columnas anteriores
+            dgvLimitsCategoryLimits.Columns.Clear(); 
 
             dgvLimitsCategoryLimits.Columns.Add("CategoryName", "Categoría");
             dgvLimitsCategoryLimits.Columns.Add("LimitAmount", "Límite");
@@ -36,7 +36,7 @@ namespace iguMonii
             UpdatedLimits.Clear();
             foreach (DataGridViewRow row in dgvLimitsCategoryLimits.Rows)
             {
-                if (row.IsNewRow) continue; // Saltar la fila de nuevo registro
+                if (row.IsNewRow) continue; 
 
                 string categoryName = row.Cells[0].Value?.ToString();
                 if (float.TryParse(row.Cells[1].Value?.ToString(), out float limitAmount) &&

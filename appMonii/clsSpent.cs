@@ -58,7 +58,7 @@ namespace appMonii.pkgDomain
         #endregion
 
         #region Methods
-        public float opGetAmount()
+        public override float opGetAmount()
         {
             return attAmount;
         }
@@ -73,14 +73,14 @@ namespace appMonii.pkgDomain
             return attAlert;
         }
 
-        public bool opSetAmount(float prmAmount)
+        public override bool opSetAmount(float prmAmount)
         {
             if (prmAmount < 0) return false;
             attAmount = prmAmount;
             return true;
         }
 
-        public bool opSetDate(DateTime prmDate)
+        public override bool opSetDate(DateTime prmDate)
         {
             if (prmDate > DateTime.Now) return false;
             attDate = prmDate;
@@ -118,7 +118,7 @@ namespace appMonii.pkgDomain
                 this.opGetDescription(),
                 this.Date,
                 this.Amount,
-                this.Category[0], // Cambiar a un solo elemento de la matriz  
+                this.Category[0], 
                 this.Alert
             );
         }

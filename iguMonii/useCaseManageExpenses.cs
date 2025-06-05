@@ -22,7 +22,7 @@ namespace iguMonii
         public useCaseManageExpenses()
         {
             InitializeComponent();
-            this.Load += frmExpenses_Load; // <- Asegura que se conecte
+            this.Load += frmExpenses_Load; 
             LoadCategories();
             InitializeCategoryLimits();
 
@@ -45,20 +45,20 @@ namespace iguMonii
 
             dgvExpenses.Columns.Add(new DataGridViewTextBoxColumn()
             {
-                DataPropertyName = "AmountExpenses", // ✅ Corregido
+                DataPropertyName = "AmountExpenses", 
                 HeaderText = "Amount",
                 DefaultCellStyle = new DataGridViewCellStyle { Format = "C0" }
             });
 
             dgvExpenses.Columns.Add(new DataGridViewTextBoxColumn()
             {
-                DataPropertyName = "Name", // ✅ Corregido
+                DataPropertyName = "Name", 
                 HeaderText = "Name"
             });
 
             dgvExpenses.Columns.Add(new DataGridViewTextBoxColumn()
             {
-                DataPropertyName = "Description", // ✅ Opcional si quieres mostrar descripción
+                DataPropertyName = "Description", 
                 HeaderText = "Description"
             });
 
@@ -68,18 +68,15 @@ namespace iguMonii
 
         private void LoadCategories()
         {
-            // Ejemplo: cargar categorías desde el controlador
-            // Debes implementar opGetAllCategories() en ClsController
             categories = controller.opGetAllCategories();
 
-            cmbCategoryExpenses.DisplayMember = "opGetName"; // Mostrar nombre de categoría
-            cmbCategoryExpenses.ValueMember = "opGetOUID";   // Valor interno es OUID
+            cmbCategoryExpenses.DisplayMember = "opGetName"; 
+            cmbCategoryExpenses.ValueMember = "opGetOUID";   
             cmbCategoryExpenses.DataSource = categories;
         }
 
         private void InitializeCategoryLimits()
         {
-            // Límites predeterminados por categoría
             categoryLimits = new Dictionary<string, float>
         {
             {"Comida", 500000},
