@@ -167,6 +167,7 @@
             this.btnLogExpenses.TabIndex = 21;
             this.btnLogExpenses.Text = "Submit";
             this.btnLogExpenses.UseVisualStyleBackColor = false;
+            this.btnLogExpenses.Click += new System.EventHandler(this.btnLogExpenses_Click);
             // 
             // lblAmountExpenses
             // 

@@ -40,20 +40,22 @@ namespace iguMonii
         }
 
 
-        private void LoadCategories()
+        private void LoadCategories(bool preserveSelection = true)
         {
-            // Desvincular temporalmente el evento
             dgvCategories.SelectionChanged -= dgvCategories_SelectionChanged;
 
             try
             {
                 dgvCategories.DataSource = null;
                 var categories = _controller.opGetAllCategories();
-
                 dgvCategories.DataSource = new BindingList<clsCategory<string>>(categories);
 
-                ClearInputs();
-                _currentCategory = null;
+                if (!preserveSelection)
+                {
+                    _currentCategory = null;
+                    ClearInputs();
+                    return;
+                }
 
                 if (dgvCategories.Rows.Count > 0)
                 {
@@ -67,6 +69,7 @@ namespace iguMonii
                 dgvCategories.SelectionChanged += dgvCategories_SelectionChanged;
             }
         }
+
 
         private void btnAddCategories_Click(object sender, EventArgs e)
         {
@@ -88,7 +91,7 @@ namespace iguMonii
             {
                 MessageBox.Show("Categoría agregada exitosamente.");
                 ClearInputs();
-                LoadCategories();
+                LoadCategories(preserveSelection: false);  
             }
             else
             {

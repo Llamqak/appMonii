@@ -56,6 +56,7 @@
             this.lblDescriptionCategories.Size = new System.Drawing.Size(60, 13);
             this.lblDescriptionCategories.TabIndex = 1;
             this.lblDescriptionCategories.Text = "Description";
+            
             // 
             // txtNameCategories
             // 
@@ -68,15 +69,15 @@
             // 
             this.txtDescriptionCategories.Location = new System.Drawing.Point(311, 32);
             this.txtDescriptionCategories.Name = "txtDescriptionCategories";
-            this.txtDescriptionCategories.Size = new System.Drawing.Size(162, 20);
+            this.txtDescriptionCategories.Size = new System.Drawing.Size(176, 20);
             this.txtDescriptionCategories.TabIndex = 3;
             // 
             // btnAddCategories
             // 
             this.btnAddCategories.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.btnAddCategories.Location = new System.Drawing.Point(479, 30);
+            this.btnAddCategories.Location = new System.Drawing.Point(311, 79);
             this.btnAddCategories.Name = "btnAddCategories";
-            this.btnAddCategories.Size = new System.Drawing.Size(75, 23);
+            this.btnAddCategories.Size = new System.Drawing.Size(176, 23);
             this.btnAddCategories.TabIndex = 4;
             this.btnAddCategories.Text = "Add";
             this.btnAddCategories.UseVisualStyleBackColor = false;
@@ -87,15 +88,15 @@
             this.dgvCategories.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCategories.Location = new System.Drawing.Point(36, 79);
             this.dgvCategories.Name = "dgvCategories";
-            this.dgvCategories.Size = new System.Drawing.Size(518, 206);
+            this.dgvCategories.Size = new System.Drawing.Size(262, 206);
             this.dgvCategories.TabIndex = 5;
             // 
             // btnUpdateCategories
             // 
             this.btnUpdateCategories.BackColor = System.Drawing.Color.DarkSeaGreen;
-            this.btnUpdateCategories.Location = new System.Drawing.Point(127, 306);
+            this.btnUpdateCategories.Location = new System.Drawing.Point(311, 172);
             this.btnUpdateCategories.Name = "btnUpdateCategories";
-            this.btnUpdateCategories.Size = new System.Drawing.Size(150, 23);
+            this.btnUpdateCategories.Size = new System.Drawing.Size(176, 23);
             this.btnUpdateCategories.TabIndex = 6;
             this.btnUpdateCategories.Text = "Update";
             this.btnUpdateCategories.UseVisualStyleBackColor = false;
@@ -104,9 +105,9 @@
             // btnDeleteCategories
             // 
             this.btnDeleteCategories.BackColor = System.Drawing.Color.Tomato;
-            this.btnDeleteCategories.Location = new System.Drawing.Point(298, 306);
+            this.btnDeleteCategories.Location = new System.Drawing.Point(311, 124);
             this.btnDeleteCategories.Name = "btnDeleteCategories";
-            this.btnDeleteCategories.Size = new System.Drawing.Size(150, 23);
+            this.btnDeleteCategories.Size = new System.Drawing.Size(176, 23);
             this.btnDeleteCategories.TabIndex = 7;
             this.btnDeleteCategories.Text = "Delete";
             this.btnDeleteCategories.UseVisualStyleBackColor = false;

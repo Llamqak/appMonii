@@ -84,49 +84,22 @@ namespace iguMonii
         };
         }
 
-        private void btnAddExpense_Click(object sender, EventArgs e)
-        {
-            if (cmbCategoryExpenses.SelectedItem == null)
-            {
-                MessageBox.Show("Select one category");
-                return;
-            }
-
-            var selectedCategory = cmbCategoryExpenses.SelectedItem as clsCategory<String>;
-            string ouid = Guid.NewGuid().ToString();
-
-            bool success = controller.opRegisterSpent(
-                ouid,
-                txtNameExpenses.Text,
-                txtDescriptionExpenses.Text,
-                float.Parse(txtAmountExpenses.Text),
-                dtpDateExpenses.Value,
-                selectedCategory
-            );
-
-            if (success)
-            {
-                MessageBox.Show("Spent registered correctly");
-                UpdateExpensesGrid();
-                CheckCategoryLimit(selectedCategory);
-                ClearForm();
-            }
-        }
-
         private void UpdateExpensesGrid()
         {
+
             dgvExpenses.DataSource = null;
             dgvExpenses.DataSource = controller.MyExpenses
                 .OrderByDescending(e => e.Date)
                 .Select(e => new {
                     e.Date,
-                    Category = e.Category.opGetName(),
+                    Category = e.Category?.opGetName() ?? "(Sin categoría)",
                     Name = e.opGetName(),
                     Description = e.opGetDescription(),
                     AmountExpenses = e.Amount
                 })
                 .ToList();
         }
+
 
         private void CheckCategoryLimit(clsCategory<String> category)
         {
@@ -190,6 +163,35 @@ namespace iguMonii
                     categoryLimits = form.UpdatedLimits;
                     UpdateCategorySummary();
                 }
+            }
+        }
+
+        private void btnLogExpenses_Click(object sender, EventArgs e)
+        {
+            if (cmbCategoryExpenses.SelectedItem == null)
+            {
+                MessageBox.Show("Select one category");
+                return;
+            }
+
+            var selectedCategory = cmbCategoryExpenses.SelectedItem as clsCategory<String>;
+            string ouid = Guid.NewGuid().ToString();
+
+            bool success = controller.opRegisterSpent(
+                ouid,
+                txtNameExpenses.Text,
+                txtDescriptionExpenses.Text,
+                float.Parse(txtAmountExpenses.Text),
+                dtpDateExpenses.Value,
+                selectedCategory
+            );
+
+            if (success)
+            {
+                MessageBox.Show("Spent registered correctly");
+                UpdateExpensesGrid();
+                CheckCategoryLimit(selectedCategory);
+                ClearForm();
             }
         }
     }
