@@ -64,10 +64,11 @@ namespace iguMonii
 
         private void LoadCategories()
         {
-            categories = controller.opGetAllCategories();
+            categories = controller.opGetAllCategories(); 
 
-            cmbCategoryExpenses.DisplayMember = "Name"; 
-            cmbCategoryExpenses.ValueMember = "OUID";   
+            cmbCategoryExpenses.DataSource = null; // reset
+            cmbCategoryExpenses.DisplayMember = "Name";
+            cmbCategoryExpenses.ValueMember = "OUID";
             cmbCategoryExpenses.DataSource = categories;
         }
 
@@ -130,16 +131,18 @@ namespace iguMonii
             cmbCategoryExpenses.SelectedIndex = -1;
         }
 
-
         private void UpdateCategorySummary()
         {
+            // Cargar categorías de nuevo si algo cambió
+            categories = controller.opGetAllCategories();
+
             StringBuilder summary = new StringBuilder("---:\n\n");
 
             foreach (var category in categories)
             {
                 string name = category.opGetName();
                 float spent = controller.MyExpenses
-                    .Where(e => e.Category.opGetOUID() == category.opGetOUID())
+                    .Where(e => e.Category != null && e.Category.opGetOUID() == category.opGetOUID())
                     .Sum(e => e.Amount);
 
                 float limit = categoryLimits.ContainsKey(name) ? categoryLimits[name] : 0;
@@ -174,7 +177,13 @@ namespace iguMonii
                 return;
             }
 
-            var selectedCategory = cmbCategoryExpenses.SelectedItem as clsCategory<String>;
+            var selectedCategory = cmbCategoryExpenses.SelectedItem as clsCategory<string>;
+            if (selectedCategory == null)
+            {
+                MessageBox.Show("Invalid category selection");
+                return;
+            }
+
             string ouid = Guid.NewGuid().ToString();
 
             bool success = controller.opRegisterSpent(
@@ -183,13 +192,16 @@ namespace iguMonii
                 txtDescriptionExpenses.Text,
                 float.Parse(txtAmountExpenses.Text),
                 dtpDateExpenses.Value,
-                selectedCategory
+                selectedCategory // ¡Usamos la categoría exacta!
             );
 
             if (success)
             {
                 MessageBox.Show("Spent registered correctly");
+
+                // Refrescar la lista para que todo quede sincronizado
                 UpdateExpensesGrid();
+                UpdateCategorySummary();
                 CheckCategoryLimit(selectedCategory);
                 ClearForm();
             }

@@ -68,6 +68,7 @@
             this.panelExpenses.Name = "panelExpenses";
             this.panelExpenses.Size = new System.Drawing.Size(593, 365);
             this.panelExpenses.TabIndex = 0;
+            
             // 
             // btnEditLimitsExpenses
             // 
