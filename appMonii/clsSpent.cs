@@ -11,6 +11,12 @@ namespace appMonii.pkgDomain
         private string attAlert;
         private clsSpent<T> attMemento;
         private clsCategory<T>[] attCategory;
+
+        public clsCategory<T> Category
+        {
+            get { return attCategory != null && attCategory.Length > 0 ? attCategory[0] : null; }
+            set { attCategory = new clsCategory<T>[] { value }; }
+        }
         #endregion
 
         #region Constructors
@@ -27,7 +33,6 @@ namespace appMonii.pkgDomain
             attCategory = new clsCategory<T>[] { prmCategory };
         }
 
-        public clsCategory<T>[] Category => attCategory;
         public bool opSetCategory(clsCategory<T> prmCategory)
         {
             if (prmCategory == null) return false;
@@ -118,7 +123,7 @@ namespace appMonii.pkgDomain
                 this.opGetDescription(),
                 this.Date,
                 this.Amount,
-                this.Category[0], 
+                this.Category, 
                 this.Alert
             );
         }

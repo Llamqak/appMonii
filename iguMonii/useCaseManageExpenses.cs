@@ -1,15 +1,12 @@
 ﻿using appMonii.pkgDomain;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Web;
+
 using System.Windows.Forms;
-using System.Xml.Linq;
 
 namespace iguMonii
 {
@@ -25,7 +22,6 @@ namespace iguMonii
             this.Load += frmExpenses_Load; 
             LoadCategories();
             InitializeCategoryLimits();
-
         }
 
         private void frmExpenses_Load(object sender, EventArgs e)
@@ -70,8 +66,8 @@ namespace iguMonii
         {
             categories = controller.opGetAllCategories();
 
-            cmbCategoryExpenses.DisplayMember = "opGetName"; 
-            cmbCategoryExpenses.ValueMember = "opGetOUID";   
+            cmbCategoryExpenses.DisplayMember = "Name"; 
+            cmbCategoryExpenses.ValueMember = "OUID";   
             cmbCategoryExpenses.DataSource = categories;
         }
 
@@ -92,7 +88,7 @@ namespace iguMonii
         {
             if (cmbCategoryExpenses.SelectedItem == null)
             {
-                MessageBox.Show("Seleccione una categoría");
+                MessageBox.Show("Select one category");
                 return;
             }
 
@@ -110,7 +106,7 @@ namespace iguMonii
 
             if (success)
             {
-                MessageBox.Show("Gasto registrado exitosamente");
+                MessageBox.Show("Spent registered correctly");
                 UpdateExpensesGrid();
                 CheckCategoryLimit(selectedCategory);
                 ClearForm();
@@ -124,7 +120,7 @@ namespace iguMonii
                 .OrderByDescending(e => e.Date)
                 .Select(e => new {
                     e.Date,
-                    Category = e.Category[0].opGetName(),
+                    Category = e.Category.opGetName(),
                     Name = e.opGetName(),
                     Description = e.opGetDescription(),
                     AmountExpenses = e.Amount
@@ -136,12 +132,12 @@ namespace iguMonii
         {
             string categoryName = category.opGetName();
             float totalSpent = controller.MyExpenses
-                .Where(e => e.Category[0].opGetOUID() == category.opGetOUID())
+                .Where(e => e.Category.opGetOUID() == category.opGetOUID())
                 .Sum(e => e.Amount);
 
             if (categoryLimits.TryGetValue(categoryName, out float limit) && totalSpent > limit)
             {
-                MessageBox.Show($"¡Alerta! Has excedido el límite de {categoryName} por ${totalSpent - limit}");
+                MessageBox.Show($"¡Alert! \r\nYou have exceeded the limit of {categoryName} by${totalSpent - limit}");
             }
 
             if (totalSpent > limit * 0.9)
@@ -164,21 +160,21 @@ namespace iguMonii
 
         private void UpdateCategorySummary()
         {
-            StringBuilder summary = new StringBuilder("Resumen por categoría:\n\n");
+            StringBuilder summary = new StringBuilder("---:\n\n");
 
             foreach (var category in categories)
             {
                 string name = category.opGetName();
                 float spent = controller.MyExpenses
-                    .Where(e => e.Category[0].opGetOUID() == category.opGetOUID())
+                    .Where(e => e.Category.opGetOUID() == category.opGetOUID())
                     .Sum(e => e.Amount);
 
                 float limit = categoryLimits.ContainsKey(name) ? categoryLimits[name] : 0;
 
                 summary.AppendLine($"{name}:");
-                summary.AppendLine($"  Gastado: ${spent:N0}");
-                summary.AppendLine($"  Límite:  ${limit:N0}");
-                summary.AppendLine($"  Estado:  {(spent > limit ? "EXCEDIDO" : "Dentro de límite")}");
+                summary.AppendLine($"  Spented: ${spent:N0}");
+                summary.AppendLine($"  Limit:  ${limit:N0}");
+                summary.AppendLine($"  State:  {(spent > limit ? "EXEDED" : "Within the limit")}");
                 summary.AppendLine();
             }
 

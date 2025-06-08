@@ -1,43 +1,47 @@
 ﻿using System;
-using System.Collections.Generic;
 using appMonii.pkgServices;
 
 namespace appMonii.pkgDomain
 {
     public class clsCategory<T> : clsEntity<T>, iIdentifiable<T> where T : IComparable<T>
     {
-        #region Attributes
         private string attCategoryName;
         private clsCategory<T> attMemento;
+        public string Name
+        {
+            get => opGetName();
+            set => base.opSetName(value);
+        }
 
-        #endregion
+        public string Description
+        {
+            get => opGetDescription();
+            set => base.opSetDescription(value);
+        }
 
-        #region Constructors
-        public clsCategory(T prmOUID, string prmName, string prmDescription,
-                      string prmCategoryName)
-       : base(prmOUID, prmName, prmDescription)
+        public T OUID
+        {
+            get => opGetOUID();
+        }
+
+
+        public clsCategory(T prmOUID, string prmName, string prmDescription, string prmCategoryName)
+            : base(prmOUID, prmName, prmDescription)
         {
             attCategoryName = prmCategoryName;
             attMemento = null;
         }
-        #endregion
 
-
-        #region Methods
-        public string opGetCategoryName()
-        {
-            return attCategoryName;
-        }
+        public string opGetCategoryName() => attCategoryName;
 
         public bool opSetCategoryName(string prmCategoryName)
         {
-            if (string.IsNullOrEmpty(prmCategoryName)) return false;
+            if (string.IsNullOrWhiteSpace(prmCategoryName)) return false;
             attCategoryName = prmCategoryName;
             return true;
         }
 
-        public bool opModify(string prmName, string prmDescription,
-                                      string prmCategoryName)
+        public bool opModify(string prmName, string prmDescription, string prmCategoryName)
         {
             opMemento();
 
@@ -52,10 +56,11 @@ namespace appMonii.pkgDomain
         protected override void opMemento()
         {
             attMemento = new clsCategory<T>(
-                this.opGetOUID(), 
-                this.opGetName(), 
+                this.opGetOUID(),
+                this.opGetName(),
                 this.opGetDescription(),
-                this.opGetCategoryName());
+                this.opGetCategoryName()
+            );
         }
 
         protected override void opRollBack()
@@ -66,8 +71,5 @@ namespace appMonii.pkgDomain
             base.opSetDescription(attMemento.opGetDescription());
             this.opSetCategoryName(attMemento.opGetCategoryName());
         }
-
-     
-        #endregion
     }
 }

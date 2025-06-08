@@ -118,6 +118,9 @@
     <EmbeddedResource Include="useCaseEditSaving.resx">
       <DependentUpon>useCaseEditSaving.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="useCaseManageCategories.resx">
+      <DependentUpon>useCaseManageCategories.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="useCaseManageExpenses.resx">
       <DependentUpon>useCaseManageExpenses.cs</DependentUpon>
     </EmbeddedResource>

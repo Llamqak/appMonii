@@ -7,9 +7,6 @@ namespace appMonii.pkgDomain
 {
     public class ClsController
     {
-        /*
-        
-        private List<clsCategory<T>> attMyCategories = new List<clsCategory<T>>();*/
 
         private static ClsController attInstance;
         public static ClsController opGetInstance()
@@ -18,6 +15,7 @@ namespace appMonii.pkgDomain
                 attInstance = new ClsController();
             return attInstance;
         }
+
         #region Incomes
         private List<clsIncome<String>> attMyIncomes = new List<clsIncome<String>>();
         public List<clsIncome<string>> MyIncomes => attMyIncomes;
@@ -38,12 +36,13 @@ namespace appMonii.pkgDomain
         }
         #endregion
         #region Expenses
-        private List<clsSpent<String>> attMySpent = new List<clsSpent<String>>();
+        private List<clsSpent<String>> attMyExpenses = new List<clsSpent<String>>();
+        public List<clsSpent<string>> MyExpenses => attMyExpenses;
 
         public bool opRegisterSpent(String prmOUID, string prmName, string prmDescription,
                               float prmAmount, DateTime prmDate, clsCategory<String> prmCategory)
         {
-            if (clsBrokerCrud.opExistsWith(prmOUID, attMySpent))
+            if (clsBrokerCrud.opExistsWith(prmOUID, attMyExpenses))
                 return false;
 
             var newExpense = new clsSpent<String>(
@@ -55,19 +54,8 @@ namespace appMonii.pkgDomain
                 prmCategory
             );
 
-            attMySpent.Add(newExpense);
+            attMyExpenses.Add(newExpense);
             return true;
-        }
-
-        public List<clsCategory<string>> opGetAllCategories()
-        {
-            return new List<clsCategory<string>>();
-        }
-
-        public List<clsCategory<string>> opGetCategoryById(String prmOUID)
-        {
-            var categories = opGetAllCategories();
-            return categories.Where(category => category.opGetOUID() == prmOUID).ToList();
         }
 
         public bool opDeleteSpent(String prmOUID)
@@ -90,88 +78,57 @@ namespace appMonii.pkgDomain
             if (clsBrokerCrud.opExistsWith(prmOUID, attMySavings) == false) return false;
             return clsBrokerCrud.opRetrieveWith(prmOUID, attMySavings).opModify(prmName, prmDescription, prmAmount, prmDate, prmCap, prmTimeLimit, prmPeriodicFee, prmQuotaFrecuency);
         }
+        public bool opDeleteSaving(String prmOUID)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
+        #region Categories
+        private List<clsCategory<string>> attMyCategories = new List<clsCategory<string>>();
 
-        #region Expenses 
-        private List<clsSpent<String>> attMyExpenses = new List<clsSpent<String>>();
-        public List<clsSpent<string>> MyExpenses => attMyExpenses;
+        public List<clsCategory<string>> opGetAllCategories()
+        {
+            return attMyCategories;
+        }
 
+        public List<clsCategory<string>> opGetCategoryById(String prmOUID)
+        {
+            var categories = opGetAllCategories();
+            return categories.Where(category => category.opGetOUID() == prmOUID).ToList();
+        }
 
-        #endregion
-        /* 
+        public bool opRegisterCategory(string prmOUID, string prmName, string prmDescription, string prmCategoryName)
+        {
+            if (clsBrokerCrud.opExistsWith(prmOUID, attMyCategories)) return false;
+            return opSetCategory(new clsCategory<string>(prmOUID, prmName, prmDescription, prmCategoryName));
+        }
 
-         
+        public bool opSetCategory(clsCategory<string> prmobj)
+        {
+            var existing = clsBrokerCrud.opRetrieveWith(prmobj.opGetOUID(), attMyCategories);
+            if (existing != null)
+            {
+                attMyCategories.Remove(existing);
+            }
+            attMyCategories.Add(prmobj);
+            return true;
+        }
 
-         public bool opRegisterCategory(T prmOUID, string prmName, string prmDescription,string prmCategoryName)
-         {
+        public bool opUpdateCategory(string prmOUID, string prmName, string prmDescription, string prmCategoryName)
+        {
+            if (!clsBrokerCrud.opExistsWith(prmOUID, attMyCategories)) return false;
+            return clsBrokerCrud.opRetrieveWith(prmOUID, attMyCategories).opModify(prmName, prmDescription, prmCategoryName);
+        }
 
-             if (clsBrokerCrud.opExistsWith(prmOUID, attMyCategories)) return false;
-             return opSetCategory(new clsCategory<T>(prmOUID, prmName, prmDescription, prmCategoryName));
-
-         }
-
-
-         
-
-         public bool opUpdateCategory(T prmOUID, string prmName, string prmDescription, string prmCategoryName)
-         {
-             if (clsBrokerCrud.opExistsWith(prmOUID, attMyCategories) == false) return false;
-             return clsBrokerCrud.opRetrieveWith(prmOUID, attMyCategories).opModify(prmName, prmDescription, prmCategoryName);
-         }
-
-         
-
-    
-         public bool opDeleteSaving(String prmOUID)
-         {
-             throw new NotImplementedException();
-         }
-
-         public bool opDeleteCategory(String prmOUID)
-         {
-             throw new NotImplementedException();
-         }
-
-         public bool opSetSaving(clsSaving<T> prmobj)
-         {
-             if (attMySavings != null) return false;
-             attMySavings = new List<clsSaving<T>> { prmobj };
-             return true;
-         }
-
-
-         public bool opSetIncome(clsIncome<T> prmobj)
-         {
-             if (attMyIncomes != null) return false;
-             attMyIncomes = new List<clsIncome<T>> { prmobj };
-             return true;
-         }
-
-         public bool opSetSpent(clsSpent<T> prmobj)
-         {
-             if (attMySpent != null) return false;
-             attMySpent = new List<clsSpent<T>> { prmobj };
-             return true;
-         }
-
-         public bool opSetCategory(clsCategory<T> prmobj)
-         {
-             if (attMyCategories != null) return false;
-             attMyCategories = new List<clsCategory<T>> { prmobj };
-             return true;
-         }
-
-
-         public void AddMySpent(clsSpent<T> newSpent)
-         {
-             if (newSpent == null) return;
-             if (this.attMySpent == null)
-                 this.attMySpent = new List<clsSpent<T>>();
-             if (!this.attMySpent.Contains(newSpent))
-                 this.attMySpent.Add(newSpent);
-         }
-        */
-
-
+        public bool opDeleteCategory(string prmOUID)
+        {
+            var category = clsBrokerCrud.opRetrieveWith(prmOUID, attMyCategories);
+            if (category == null) return false;
+            return attMyCategories.Remove(category);
+        }
     }
+
+    #endregion
+
 }
+

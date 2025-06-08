@@ -42,5 +42,11 @@ namespace iguMonii
             var form = new useCaseManageSavings();
             ShowInPanel(form);
         }
+
+        private void btnCategory_Click(object sender, EventArgs e)
+        {
+            var form = new useCaseManageCategories();
+            ShowInPanel(form);
+        }
     }
 }

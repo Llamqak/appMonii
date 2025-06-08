@@ -74,7 +74,7 @@
             this.btnEditLimitsExpenses.BackColor = System.Drawing.SystemColors.Highlight;
             this.btnEditLimitsExpenses.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnEditLimitsExpenses.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnEditLimitsExpenses.Location = new System.Drawing.Point(41, 238);
+            this.btnEditLimitsExpenses.Location = new System.Drawing.Point(387, 122);
             this.btnEditLimitsExpenses.Name = "btnEditLimitsExpenses";
             this.btnEditLimitsExpenses.Size = new System.Drawing.Size(144, 23);
             this.btnEditLimitsExpenses.TabIndex = 38;
@@ -124,7 +124,7 @@
             // 
             this.txtCategorySummaryExpenses.BackColor = System.Drawing.SystemColors.HighlightText;
             this.txtCategorySummaryExpenses.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.txtCategorySummaryExpenses.Location = new System.Drawing.Point(41, 280);
+            this.txtCategorySummaryExpenses.Location = new System.Drawing.Point(41, 295);
             this.txtCategorySummaryExpenses.Name = "txtCategorySummaryExpenses";
             this.txtCategorySummaryExpenses.Size = new System.Drawing.Size(505, 23);
             this.txtCategorySummaryExpenses.TabIndex = 32;
@@ -132,9 +132,9 @@
             // dgvExpenses
             // 
             this.dgvExpenses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvExpenses.Location = new System.Drawing.Point(41, 151);
+            this.dgvExpenses.Location = new System.Drawing.Point(41, 164);
             this.dgvExpenses.Name = "dgvExpenses";
-            this.dgvExpenses.Size = new System.Drawing.Size(505, 81);
+            this.dgvExpenses.Size = new System.Drawing.Size(505, 125);
             this.dgvExpenses.TabIndex = 28;
             // 
             // lblCategoryExpenses
